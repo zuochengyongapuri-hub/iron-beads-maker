@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="VEYLIGN BEADSは、好きな画像からかんたんにアイロンビーズ台紙を作れるWebツールです。手持ちのビーズ色を選択し、ExcelやA4実寸PDFで出力できます。"
+  >
+
+  <title>
+    VEYLIGN BEADS | アイロンビーズ台紙メーカー
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+  <script
+    type="module"
+    src="./js/app.js"
+  ></script>
+</head>
+
+
+<body>
+
+  <!-- ======================================================
+       HEADER
+  ======================================================= -->
+
+  <header class="site-header">
+
+    <a
+      class="brand"
+      href="#maker"
+      aria-label="VEYLIGN BEADS"
+    >
+      <span
+        class="brand-icon"
+        aria-hidden="true"
+      >
+        ▦
+      </span>
+
+      <span class="brand-text">
+        <strong>
+          VEYLIGN
+        </strong>
+
+        <span>
+          BEADS
+        </span>
+      </span>
+    </a>
+
+
+    <nav
+      class="header-nav"
+      aria-label="メインメニュー"
+    >
+
+      <a
+        class="header-link"
+        href="#maker"
+      >
+        台紙を作る
+      </a>
+
+      <a
+        class="header-link"
+        href="#how-to-use"
+      >
+        使い方
+      </a>
+
+      <span class="local-badge">
+        画像は端末内で処理
+      </span>
+
+    </nav>
+
+  </header>
+
+
+  <!-- ======================================================
+       MAIN
+  ======================================================= -->
+
+  <main>
+
+    <!-- ====================================================
+         HERO
+    ===================================================== -->
+
+    <section
+      id="maker"
+      class="intro"
+    >
+
+      <p class="eyebrow">
+        VEYLIGN BEADS
+      </p>
+
+      <h1>
+        好きな画像を、
+        <br class="mobile-break">
+        ビーズのかたちに。
+      </h1>
+
+      <p class="intro-description">
+        画像を入れて、サイズを決めて、
+        持っている色を選ぶだけ。
+        <br>
+        印刷してそのまま使える
+        アイロンビーズ台紙をつくります。
+      </p>
+
+    </section>
+
+
+    <!-- ====================================================
+         WORKSPACE
+    ===================================================== -->
+
+    <div class="workspace">
+
+
+      <!-- ==================================================
+           LEFT SETTINGS
+      =================================================== -->
+
+      <aside class="settings">
+
+
+        <!-- =================================================
+             01 IMAGE
+        ================================================== -->
+
+        <section class="card">
+
+          <h2>
+            <span class="step">
+              01
+            </span>
+
+            画像を選ぶ
+          </h2>
+
+
+          <div
+            id="dropArea"
+            class="drop-area"
+          >
+
+            <span
+              class="upload-symbol"
+              aria-hidden="true"
+            >
+              ＋
+            </span>
+
+
+            <p>
+              ここに画像をドロップ
+            </p>
+
+
+            <button
+              id="chooseButton"
+              class="primary"
+              type="button"
+            >
+              画像を選択
+            </button>
+
+
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              hidden
+            >
+
+
+            <small>
+              PNG / JPEG / WebP · 最大20MB
+            </small>
+
+          </div>
+
+
+          <p
+            id="imageInfo"
+            class="hint"
+          >
+            まだ画像が選択されていません
+          </p>
+
+
+          <p
+            id="message"
+            class="error"
+            role="alert"
+          ></p>
+
+        </section>
+
+
+        <!-- =================================================
+             02 SIZE
+        ================================================== -->
+
+        <section class="card">
+
+          <h2>
+            <span class="step">
+              02
+            </span>
+
+            完成サイズ
+          </h2>
+
+
+          <label for="beadSize">
+            ビーズサイズ
+          </label>
+
+
+          <div class="input-unit">
+
+            <input
+              id="beadSize"
+              type="number"
+              min="1"
+              max="20"
+              step="0.1"
+              value="5"
+            >
+
+            <span>
+              mm
+            </span>
+
+          </div>
+
+
+          <div class="size-inputs">
+
+            <div>
+
+              <label for="paperWidth">
+                完成横幅
+              </label>
+
+              <div class="input-unit">
+
+                <input
+                  id="paperWidth"
+                  type="number"
+                  min="1"
+                  max="2000"
+                  step="0.1"
+                  value="150"
+                >
+
+                <span>
+                  mm
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <label for="paperHeight">
+                完成縦幅
+              </label>
+
+              <div class="input-unit">
+
+                <input
+                  id="paperHeight"
+                  type="number"
+                  min="1"
+                  max="2000"
+                  step="0.1"
+                  value="150"
+                >
+
+                <span>
+                  mm
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="sizeResult"
+            class="size-result"
+            aria-live="polite"
+          ></div>
+
+
+          <p
+            id="sizeError"
+            class="error"
+            role="alert"
+          ></p>
+
+
+          <p class="hint">
+            端数は四捨五入。
+            実際の完成サイズは
+            マス数 × ビーズサイズです。
+            縦横それぞれ最大200マス。
+          </p>
+
+        </section>
+
+
+        <!-- =================================================
+             03 CONVERSION
+        ================================================== -->
+
+        <section class="card">
+
+          <h2>
+            <span class="step">
+              03
+            </span>
+
+            変換を調整
+          </h2>
+
+
+          <div class="range-label">
+
+            <label for="backgroundThreshold">
+              背景除去
+            </label>
+
+            <output
+              id="backgroundValue"
+              for="backgroundThreshold"
+            >
+              25
+            </output>
+
+          </div>
+
+
+          <input
+            id="backgroundThreshold"
+            type="range"
+            min="0"
+            max="100"
+            value="25"
+          >
+
+
+          <p class="hint">
+            0でオフ。
+            画像の外周につながる背景を
+            自動的に除去します。
+          </p>
+
+
+          <div class="range-label">
+
+            <label for="lineSensitivity">
+              線を残す強さ
+            </label>
+
+            <output
+              id="lineValue"
+              for="lineSensitivity"
+            >
+              45
+            </output>
+
+          </div>
+
+
+          <input
+            id="lineSensitivity"
+            type="range"
+            min="0"
+            max="100"
+            value="45"
+          >
+
+
+          <p class="hint">
+            細い輪郭線を
+            ビーズとして残しやすくします。
+          </p>
+
+
+          <div class="range-label">
+
+            <label for="colorBoost">
+              色強調
+            </label>
+
+            <output
+              id="colorValue"
+              for="colorBoost"
+            >
+              20
+            </output>
+
+          </div>
+
+
+          <input
+            id="colorBoost"
+            type="range"
+            min="0"
+            max="100"
+            value="20"
+          >
+
+
+          <p class="hint">
+            元画像の色を強調して
+            ビーズ色へ変換します。
+          </p>
+
+        </section>
+
+
+        <!-- =================================================
+             04 AVAILABLE COLORS
+        ================================================== -->
+
+        <section class="card">
+
+          <h2>
+            <span class="step">
+              04
+            </span>
+
+            持っているビーズ色
+          </h2>
+
+
+          <p class="hint color-help">
+            実際に持っている色だけ
+            選択してください。
+            OFFにした色は
+            ビーズ変換に使用しません。
+          </p>
+
+
+          <div class="color-action-row">
+
+            <button
+              id="selectAllColors"
+              type="button"
+            >
+              すべて選択
+            </button>
+
+
+            <button
+              id="clearAllColors"
+              type="button"
+            >
+              すべて解除
+            </button>
+
+          </div>
+
+
+          <div
+            id="availableColorGrid"
+            class="available-color-grid"
+          ></div>
+
+
+          <p
+            id="availableColorInfo"
+            class="hint"
+            aria-live="polite"
+          >
+            16色すべて使用できます
+          </p>
+
+        </section>
+
+      </aside>
+
+
+      <!-- ==================================================
+           RIGHT AREA
+      =================================================== -->
+
+      <div class="canvases">
+
+
+        <!-- =================================================
+             IMAGE PLACEMENT
+        ================================================== -->
+
+        <section class="card editor">
+
+          <div class="section-heading">
+
+            <h2>
+              元画像の配置
+            </h2>
+
+            <span class="tag">
+              DRAG &amp; ZOOM
+            </span>
+
+          </div>
+
+
+          <p class="hint">
+            ドラッグで移動、
+            マウスホイールで拡大・縮小。
+            この枠内が完成する台紙です。
+          </p>
+
+
+          <div class="canvas-stage">
+
+            <canvas
+              id="cropCanvas"
+              width="720"
+              height="720"
+              tabindex="0"
+              aria-label="元画像の配置"
+            ></canvas>
+
+
+            <div
+              id="editorEmpty"
+              class="empty-state"
+            >
+
+              <span aria-hidden="true">
+                ▦
+              </span>
+
+              <strong>
+                どんな作品をつくりますか？
+              </strong>
+
+              <p>
+                画像を選ぶと、
+                ここで位置と大きさを調整できます。
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <fieldset
+            id="placementControls"
+            disabled
+          >
+
+            <legend class="sr-only">
+              画像の配置操作
+            </legend>
+
+
+            <div class="button-row">
+
+              <button
+                id="fitButton"
+                type="button"
+              >
+                画像全体を入れる
+              </button>
+
+              <button
+                id="fillButton"
+                type="button"
+              >
+                枠いっぱい
+              </button>
+
+              <button
+                id="centerButton"
+                type="button"
+              >
+                中央に戻す
+              </button>
+
+            </div>
+
+
+            <div class="zoom-row">
+
+              <label for="zoomSlider">
+                ズーム
+              </label>
+
+              <input
+                id="zoomSlider"
+                type="range"
+                min="5"
+                max="800"
+                value="100"
+              >
+
+              <output
+                id="zoomValue"
+                for="zoomSlider"
+              >
+                100%
+              </output>
+
+            </div>
+
+          </fieldset>
+
+        </section>
+
+
+        <!-- =================================================
+             PREVIEW
+        ================================================== -->
+
+        <section class="card preview">
+
+          <div class="section-heading">
+
+            <h2>
+              ビーズ変換プレビュー
+            </h2>
+
+            <span
+              id="previewStatus"
+              class="tag"
+            >
+              画像を待っています
+            </span>
+
+          </div>
+
+
+          <p
+            id="previewInfo"
+            class="hint"
+            aria-live="polite"
+          >
+            透明なマスにはビーズを置きません。
+          </p>
+
+
+          <div class="canvas-stage">
+
+            <canvas
+              id="patternCanvas"
+              width="600"
+              height="600"
+              aria-label="ビーズ変換結果"
+            ></canvas>
+
+
+            <div
+              id="previewEmpty"
+              class="empty-state"
+            >
+
+              <span aria-hidden="true">
+                ⠿
+              </span>
+
+              <strong>
+                ここにビーズの台紙を表示
+              </strong>
+
+              <p>
+                配置・色・変換設定の変更が
+                自動で反映されます。
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <p class="hint">
+            5マスごとに太いグリッド線を表示します。
+            画面上の色は目安です。
+          </p>
+
+        </section>
+
+
+        <!-- =================================================
+             USED BEADS
+        ================================================== -->
+
+        <section class="card">
+
+          <div class="section-heading">
+
+            <h2>
+              使用ビーズ
+            </h2>
+
+            <strong
+              id="totalCount"
+              class="total-count"
+            >
+              0 個
+            </strong>
+
+          </div>
+
+
+          <p
+            id="countSummary"
+            class="hint"
+          >
+            固定16色の内訳
+          </p>
+
+
+          <div
+            id="paletteGrid"
+            class="palette-grid"
+          ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             05 EXPORT
+        ================================================== -->
+
+        <section
+          id="exportCard"
+          class="card export-card"
+        >
+
+          <div class="section-heading">
+
+            <h2>
+              <span class="step">
+                05
+              </span>
+
+              台紙を出力
+            </h2>
+
+            <span class="tag">
+              EXPORT
+            </span>
+
+          </div>
+
+
+          <p class="hint">
+            現在表示されている
+            ビーズ台紙を出力します。
+          </p>
+
+
+          <div class="export-summary">
+
+            <div>
+              <span>
+                マス数
+              </span>
+
+              <strong id="exportGridSize">
+                30 × 30
+              </strong>
+            </div>
+
+
+            <div>
+              <span>
+                完成サイズ
+              </span>
+
+              <strong id="exportRealSize">
+                150 × 150 mm
+              </strong>
+            </div>
+
+
+            <div>
+              <span>
+                使用ビーズ
+              </span>
+
+              <strong id="exportBeadCount">
+                0 個
+              </strong>
+            </div>
+
+
+            <div>
+              <span>
+                使用色
+              </span>
+
+              <strong id="exportColorCount">
+                0 色
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="export-buttons">
+
+            <button
+              id="exportExcelButton"
+              class="export-button"
+              type="button"
+              disabled
+            >
+
+              <span class="export-icon">
+                XLSX
+              </span>
+
+              <span>
+                <strong>
+                  Excelを出力
+                </strong>
+
+                <small>
+                  後から編集できるビーズ台紙
+                </small>
+              </span>
+
+            </button>
+
+
+            <button
+              id="exportPdfButton"
+              class="export-button"
+              type="button"
+              disabled
+            >
+
+              <span class="export-icon">
+                PDF
+              </span>
+
+              <span>
+                <strong>
+                  PDFを出力
+                </strong>
+
+                <small>
+                  A4・実寸印刷用
+                </small>
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <p
+            id="exportMessage"
+            class="hint"
+            aria-live="polite"
+          >
+            画像を読み込むと出力できます。
+          </p>
+
+
+          <div class="note">
+
+            <strong>
+              PDFは実寸で出力
+            </strong>
+
+            <br>
+
+            1マスを指定したビーズサイズで出力します。
+            A4を超える作品は、
+            実寸を維持したまま複数ページへ分割します。
+
+            <br><br>
+
+            印刷時は
+            <strong>
+              A4 / 100% / 実際のサイズ
+            </strong>
+            を選択し、
+            「用紙に合わせる」はOFFにしてください。
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+
+    <!-- ====================================================
+         HOW TO USE
+    ===================================================== -->
+
+    <section
+      id="how-to-use"
+      class="how-to-section"
+    >
+
+      <div class="how-to-heading">
+
+        <p class="eyebrow">
+          HOW TO USE
+        </p>
+
+        <h2>
+          5ステップで、台紙が完成。
+        </h2>
+
+        <p>
+          難しい設定は必要ありません。
+          上から順番に進めるだけです。
+        </p>
+
+      </div>
+
+
+      <div class="how-to-grid">
+
+
+        <article class="how-to-card">
+
+          <span class="how-to-number">
+            01
+          </span>
+
+          <strong>
+            画像を入れる
+          </strong>
+
+          <p>
+            好きな画像をドラッグ＆ドロップ、
+            または「画像を選択」から読み込みます。
+          </p>
+
+        </article>
+
+
+        <article class="how-to-card">
+
+          <span class="how-to-number">
+            02
+          </span>
+
+          <strong>
+            サイズを決める
+          </strong>
+
+          <p>
+            ビーズサイズと完成サイズをmmで入力。
+            必要なマス数は自動で計算します。
+          </p>
+
+        </article>
+
+
+        <article class="how-to-card">
+          <span class="how-to-number">
+            03
+          </span>
+
+          <strong>
+            画像を合わせる
+          </strong>
+
+          <p>
+            画像をドラッグして位置を調整。
+            ホイールやスライダーで
+            拡大・縮小できます。
+          </p>
+
+        </article>
+
+
+        <article class="how-to-card">
+
+          <span class="how-to-number">
+            04
+          </span>
+
+          <strong>
+            持っている色を選ぶ
+          </strong>
+
+          <p>
+            手元にあるビーズ色だけを選択。
+            持っていない色は
+            変換候補から除外します。
+          </p>
+
+        </article>
+
+
+        <article class="how-to-card">
+
+          <span class="how-to-number">
+            05
+          </span>
+
+          <strong>
+            台紙を出力する
+          </strong>
+
+          <p>
+            Excelなら後から編集可能。
+            PDFなら指定したビーズサイズの
+            実寸台紙として印刷できます。
+          </p>
+
+        </article>
+
+      </div>
+
+
+      <!-- ==================================================
+           PRINT GUIDE
+      =================================================== -->
+
+      <div class="print-guide">
+
+        <div class="print-guide-icon">
+          100%
+        </div>
+
+
+        <div>
+
+          <strong>
+            PDFを実寸で印刷するには
+          </strong>
+
+          <p>
+            印刷設定を
+            「A4・100%・実際のサイズ」にして、
+            「用紙に合わせる」はOFFにしてください。
+            PDFには50mmの確認スケールも表示されます。
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="how-to-action">
+
+        <a
+          class="primary-link"
+          href="#maker"
+        >
+          台紙を作る
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         VEYLIGN BRAND
+    ===================================================== -->
+
+    <section class="brand-message">
+
+      <p class="eyebrow">
+        VEYLIGN
+      </p>
+
+
+      <h2>
+        違う目線を、
+        <br>
+        ひとつの景色へ。
+      </h2>
+
+
+      <p>
+        立場も、知識も、経験も違う。
+        <br>
+        だからこそ、
+        複雑なものを誰もが理解し、
+        迷わず使えるかたちへ。
+      </p>
+
+    </section>
+
+
+    <!-- ====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+      <div>
+
+        <strong>
+          VEYLIGN BEADS
+        </strong>
+
+        <span>
+          アイロンビーズ台紙メーカー
+        </span>
+
+      </div>
+
+
+      <span class="footer-brand">
+        VEYLIGN — VIEW + ALIGN
+      </span>
+
+    </footer>
+
+  </main>
+
+</body>
+
+</html>
